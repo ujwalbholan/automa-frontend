@@ -1,11 +1,11 @@
-import React from "react";
+import EmailCheck from "./EmailCheck";
 
 const Forget = () => {
   return (
-    <>
-      <h1>Forget</h1>
-    </>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <EmailCheck></EmailCheck>
+    </div>
   );
 };
 
-export default Forget ;
+export default Forget;

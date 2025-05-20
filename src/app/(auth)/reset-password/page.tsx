@@ -1,11 +1,11 @@
-import React from "react";
+import ResetPage from "./ResetPage";
 
 const Reset = () => {
   return (
-    <>
-      <h1>Reset</h1>
-    </>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <ResetPage></ResetPage>
+    </div>
   );
 };
 
-export default Reset ;
+export default Reset;

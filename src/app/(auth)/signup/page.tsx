@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { toast } from "sonner";
 
 const Signup = () => {
   const signupUrl = process.env.NEXT_PUBLIC_SIGN_UP_URL;
@@ -29,14 +30,25 @@ const Signup = () => {
         password: password,
       });
 
-      // Set the token to cookie
-      const { accessToken } = response.data;
-      Cookies.set("access_token", accessToken, {
-        expires: 0.0104,
-        secure: true,
-      }); // expires in 15min
+      console.log(response);
 
-      router.push("/dashboard");
+      // Set the token to cookie
+      if (response.status >= 200 && response.status < 300) {
+        const { accessToken } = response.data;
+        Cookies.set("access_token", accessToken, {
+          expires: 0.0104,
+          secure: true,
+        }); // expires in 15min
+
+        toast("User Login Successully", {
+          action: {
+            label: "Undo",
+            onClick: () => Label,
+          },
+        });
+
+        router.push("/dashboard");
+      }
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
         throw {

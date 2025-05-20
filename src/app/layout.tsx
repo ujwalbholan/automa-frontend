@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import ModalProvider from "@/components/providers/model-provider";
 
 // Geist
 // const geistSans = Geist({
@@ -41,7 +42,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ModalProvider>{children}</ModalProvider>
         </ThemeProvider>
       </body>
     </html>

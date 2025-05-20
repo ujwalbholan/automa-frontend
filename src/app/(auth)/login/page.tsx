@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios";
@@ -28,19 +29,34 @@ const Login = () => {
       });
 
       // Set the token to cookie
-      const { accessToken } = response.data;
-      Cookies.set("access_token", accessToken, {
-        expires: 0.0104,
-        secure: true,
-      }); // expires in 15min
+      if (response.status >= 200 && response.status < 300) {
+        const { accessToken } = response.data;
+        Cookies.set("access_token", accessToken, {
+          expires: 0.0104,
+          secure: true,
+        }); // expires in 15min
 
-      router.push("/dashboard");
+        toast("User Login Successully", {
+          action: {
+            label: "Undo",
+            onClick: () => Label,
+          },
+        });
+
+        router.push("/dashboard");
+      }
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
-        throw {
-          message: err.response?.data?.message || err.message,
-          statusCode: err.response?.status || 500,
-        };
+        toast(err.message, {
+          action: {
+            label: "Undo",
+            onClick: () => Label,
+          },
+        });
+        // throw {
+        //   message: err.response?.data?.message || err.message,
+        //   statusCode: err.response?.status || 500,
+        // };
       } else {
         throw {
           message: (err as Error).message,
@@ -103,6 +119,14 @@ const Login = () => {
               type="submit"
               disabled={loading}
               className="w-full border shadow cursor-pointer"
+              // onClick={() => {
+              //   toast("User Login Successully", {
+              //     action: {
+              //       label: "Undo",
+              //       onClick: () => Label,
+              //     },
+              //   });
+              // }}
             >
               {loading ? "Logging in..." : "Login"}
             </Button>
