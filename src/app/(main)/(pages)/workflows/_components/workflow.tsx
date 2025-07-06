@@ -22,13 +22,14 @@ type Props = {
 };
 
 const Workflow = ({ description, id, name, publish }: Props) => {
-    // const onPublishFlow = async (event: any) => {
-    //   const response = await onFlowPublish(
-    //     id,
-    //     event.target.ariaChecked === "false"
-    //   );
-    //   if (response) toast.message(response);
-    // };
+  //wire up db
+  // const onPublishFlow = async (event: any) => {
+  //   const response = await onFlowPublish(
+  //     id,
+  //     event.target.ariaChecked === "false"
+  //   );
+  //   if (response) toast.message(response);
+  // };
 
   return (
     <Card className="flex flex-row w-full items-center justify-between">
